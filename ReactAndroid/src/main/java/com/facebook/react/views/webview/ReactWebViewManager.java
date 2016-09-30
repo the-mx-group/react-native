@@ -24,6 +24,7 @@ import android.text.TextUtils;
 import android.view.ViewGroup.LayoutParams;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -307,6 +308,13 @@ public class ReactWebViewManager extends SimpleViewManager<WebView> {
   @ReactProp(name = "injectedJavaScript")
   public void setInjectedJavaScript(WebView view, @Nullable String injectedJavaScript) {
     ((ReactWebView) view).setInjectedJavaScript(injectedJavaScript);
+  }
+
+  @ReactProp(name = "mixedContentModeEnabled")
+  public void setMixedContentModeEnabled(WebView view, boolean enabled) {
+    if (enabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      view.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+    }
   }
 
   @ReactProp(name = "source")
