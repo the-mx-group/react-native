@@ -153,11 +153,18 @@ class WebView extends React.Component {
      * start playing. The default value is `false`.
      */
     mediaPlaybackRequiresUserAction: PropTypes.bool,
+
+    /**
+     * Used on Android(5.0+), controls whether Mixed content mode is enabled or not
+     * @platform android
+     */
+    mixedContentModeEnabled: PropTypes.bool,
   };
 
   static defaultProps = {
     javaScriptEnabled : true,
     scalesPageToFit: true,
+    mixedContentModeEnabled: false,
   };
 
   state = {
@@ -226,6 +233,7 @@ class WebView extends React.Component {
         onLoadingError={this.onLoadingError}
         testID={this.props.testID}
         mediaPlaybackRequiresUserAction={this.props.mediaPlaybackRequiresUserAction}
+        mixedContentModeEnabled={this.props.mixedContentModeEnabled}
       />;
 
     return (
